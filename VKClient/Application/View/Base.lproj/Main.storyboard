@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="344-BU-U0F">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--RootVC-->
+        <scene sceneID="RPf-lI-6Be">
+            <objects>
+                <viewController id="344-BU-U0F" customClass="RootVC" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cnG-QW-I81">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="vk-large" translatesAutoresizingMaskIntoConstraints="NO" id="4SI-Ai-SBF">
+                                <rect key="frame" x="93" y="129" width="189" height="182"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ny1-lo-eex">
+                                <rect key="frame" x="135" y="443" width="104" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="US3-o4-H3B">
+                                <rect key="frame" x="169" y="398" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.21699960395188231" green="0.2263507545817065" blue="0.44404346446700504" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <viewLayoutGuide key="safeArea" id="R5f-qE-QTN"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="US3-o4-H3B" id="s7X-6V-h3J"/>
+                        <segue destination="rlE-5m-7kf" kind="show" identifier="RootToLogin" id="BfF-e8-5Sv"/>
+                        <segue destination="Oal-uF-DeY" kind="show" identifier="RootToMain" id="xcn-H5-a4e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Afm-4z-PvP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-223" y="-404"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="G7O-rJ-7K2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" id="rlE-5m-7kf" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LAY-sO-mMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="495" y="-542"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="x8z-Bl-7Is">
+            <objects>
+                <tabBarController id="Oal-uF-DeY" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dey-TB-nYb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="OZR-up-z6j" kind="relationship" relationship="viewControllers" id="5Ee-pi-EM7"/>
+                        <segue destination="Laf-Z5-a2L" kind="relationship" relationship="viewControllers" id="LMM-gs-WeI"/>
+                        <segue destination="UXl-cp-qxM" kind="relationship" relationship="viewControllers" id="tQu-x6-BcY"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0ix-Az-9fA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1022" y="-404"/>
+        </scene>
+        <!--Newsfeed-->
+        <scene sceneID="NK1-0C-nwv">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Newsfeed" id="OZR-up-z6j" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="GhC-KH-3yK"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Zu-qS-R6X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1780" y="-512"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="VhC-U0-Y3K">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Friends" id="Laf-Z5-a2L" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="iMM-Xi-Dd3"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DCH-Mj-YNA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1768" y="-405"/>
+        </scene>
+        <!--Groups-->
+        <scene sceneID="dDF-te-Wf6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Groups" id="UXl-cp-qxM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="gcR-2T-JqO"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Vf-XO-ivU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1766" y="-300"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="vk-large" width="128" height="128"/>
+    </resources>
+</document>

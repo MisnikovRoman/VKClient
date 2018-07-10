@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Th-Kb-GqC">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Friends-->
+        <scene sceneID="uZC-Cf-NHy">
+            <objects>
+                <viewController id="Uoc-gz-JJa" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="klb-H1-xZe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L2N-EE-Fbc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="GRl-Zn-3nk">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GRl-Zn-3nk" id="Gw0-yf-sq9">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="L2N-EE-Fbc" firstAttribute="bottom" secondItem="h3f-iB-oPd" secondAttribute="bottom" id="4kk-cS-ZAs"/>
+                            <constraint firstItem="L2N-EE-Fbc" firstAttribute="leading" secondItem="h3f-iB-oPd" secondAttribute="leading" id="VX2-5C-cM6"/>
+                            <constraint firstItem="L2N-EE-Fbc" firstAttribute="trailing" secondItem="h3f-iB-oPd" secondAttribute="trailing" id="qtQ-KP-c7s"/>
+                            <constraint firstItem="L2N-EE-Fbc" firstAttribute="top" secondItem="h3f-iB-oPd" secondAttribute="top" id="uRD-Na-4X4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="h3f-iB-oPd"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Friends" id="oAr-2R-iIY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VDh-C0-lhO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2160.8000000000002" y="-321.58920539730138"/>
+        </scene>
+        <!--Friends-->
+        <scene sceneID="kOT-B7-SBj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Th-Kb-GqC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Friends" image="friend-icon" selectedImage="friend-icon" id="Mer-RZ-Bpd"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wIn-gp-dZj">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Uoc-gz-JJa" kind="relationship" relationship="rootViewController" id="8QV-D0-3US"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="keg-XN-Xpa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1221.5999999999999" y="-321.58920539730138"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="friend-icon" width="24" height="24"/>
+    </resources>
+</document>
