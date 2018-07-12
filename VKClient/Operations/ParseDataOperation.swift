@@ -10,7 +10,7 @@ import Foundation
 
 class ParseDataOperation<T: Decodable>: AsyncOperation {
     
-    var outputData: [T] = []
+    var outputData: T?
     
     override func main() {
         // get object of previous operation (load data operation)
@@ -19,10 +19,13 @@ class ParseDataOperation<T: Decodable>: AsyncOperation {
         guard let data = getDataOperation.data else { cancel(); return }
         // create decoder
         let decoder = JSONDecoder()
+        // setup decoder
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .secondsSince1970
         // parse data with Decodable protocol
-        guard let parsedPosts = try? decoder.decode([T].self, from: data) else { cancel(); return }
+        guard let parsedData = try? decoder.decode(T.self, from: data) else { cancel(); return }
         // save to class property
-        self.outputData = parsedPosts
+        self.outputData = parsedData
         // change state
         self.state = .finished
     }

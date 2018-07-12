@@ -102,7 +102,20 @@ class NewsCell: UITableViewCell {
     
     override func layoutIfNeeded() {
         super.layoutIfNeeded()
-        // ??? code
+        
+        setupAvatarImage(cellSize)
+        setupTitleLbl(cellSize)
+        setupTimeLbl(cellSize)
+        setupBodyLbl(cellSize)
+        setupPictureImageView(cellSize)
+        setupLikesImageView(cellSize)
+        setupLikesLbl(cellSize)
+        setupRepostsImageView(cellSize)
+        setupRepostsLbl(cellSize)
+        setupCommentsImageView(cellSize)
+        setupCommentLbl(cellSize)
+        setupViewImageView(cellSize)
+        setupViewLbl(cellSize)
     }
     
     // MARK: - Setup methods

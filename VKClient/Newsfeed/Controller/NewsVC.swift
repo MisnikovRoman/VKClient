@@ -7,40 +7,33 @@
 //
 
 import UIKit
+import Alamofire
 
 class NewsVC: UIViewController {
     
     // Variables
-    var newsfeed: [NewsItem] = []
+    var tableViewData: [NewsItem] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     // Outlets
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var newsSegmentedControl: UISegmentedControl!
     
     // View controller life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
-        loadNewsfeed()
     }
     
     // Class methods
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-    }
-    
-    func loadNewsfeed() {
-        /*VKService.instance.loadNewsfeed { (vkNewsfeedResponse) in
-           DispatchQueue.main.async {
-                for vkNewsItem in vkNewsfeedResponse.response.items {
-                    let newsItem = NewsItem(with: vkNewsItem, from: vkNewsfeedResponse)
-                    self.newsfeed.append(newsItem)
-                }
-                self.tableView.reloadData()
-            }
-        }*/
     }
     
     // @IBActions
@@ -57,6 +50,10 @@ class NewsVC: UIViewController {
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
+    
+    @IBAction func refreshBtnTapped(_ sender: UIBarButtonItem) {
+       VKService.instance.getNewsfeed(vc: self)
+    }
 }
 
 extension NewsVC: UITableViewDelegate {
@@ -65,14 +62,13 @@ extension NewsVC: UITableViewDelegate {
 
 extension NewsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return newsfeed.count
-        return 12
+        return tableViewData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CELL_NEWS) as? NewsCell else { return UITableViewCell() }
-        // cell.setupCell(with: newsfeed[indexPath.row])
+        cell.setupCell(newsItem: tableViewData[indexPath.row])
         return cell
     }
 }
