@@ -19,15 +19,14 @@ class NewsItem {
         
         // 0 - avatar (main image)
         var avatarUrl: String {
-            return "test"
-//            let authorId = item.sourceId
-//            if authorId > 0 {
-//                return "⚠️ Didn't loaded user photo"
-//            } else {
-//                let allGroups = newsfeed.response.groups
-//                guard let indexOfAuthor = (allGroups.index{ $0.id == -authorId }) else { return "Unknown group" }
-//                return allGroups[indexOfAuthor].photo100
-//            }
+            let authorId = item.sourceId
+            if authorId > 0 {
+                return "⚠️ Didn't loaded user photo"
+            } else {
+                let allGroups = newsfeed.response.groups
+                guard let indexOfAuthor = (allGroups.index{ $0.id == -authorId }) else { return "Unknown group" }
+                return allGroups[indexOfAuthor].photo100
+            }
         }
         var avatarImage = #imageLiteral(resourceName: "avatar-man")
         // ⚠️ ADD: Image loading operation
@@ -35,15 +34,14 @@ class NewsItem {
         
         // 1 - author (user name or group name)
         var authorName: String {
-             return "test"
-//            let authorId = item.sourceId
-//            if authorId > 0 {
-//                return "Unknown user"
-//            } else {
-//                let allGroups = newsfeed.response.groups
-//                guard let indexOfAuthor = (allGroups.index{ $0.id == -authorId }) else { return "Unknown group" }
-//                return allGroups[indexOfAuthor].name
-//            }
+            let authorId = item.sourceId
+            if authorId > 0 {
+                return "Unknown user"
+            } else {
+                let allGroups = newsfeed.response.groups
+                guard let indexOfAuthor = (allGroups.index{ $0.id == -authorId }) else { return "Unknown group" }
+                return allGroups[indexOfAuthor].name
+            }
         }
         self.author = authorName
         
