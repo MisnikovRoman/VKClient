@@ -66,3 +66,6 @@ let SEARCH_GROUP = "search_group"
 // other constants
 let CLIENT_ID = "6491638"   // VK app identification number
 let APP_SCOPE = "270342"    // Битовая маска настроек доступа приложения (https://vk.com/dev/permissions)
+
+// layout constants
+let INSETS_CONSTANT = 16.0

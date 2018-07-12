@@ -11,7 +11,7 @@ import UIKit
 class NewsVC: UIViewController {
     
     // Variables
-    var newsfeed: [NewsItem] = []
+    //var newsfeed: [NewsItem] = []
     
     // Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -32,7 +32,7 @@ class NewsVC: UIViewController {
     }
     
     func loadNewsfeed() {
-        VKService.instance.loadNewsfeed { (vkNewsfeedResponse) in
+        /*VKService.instance.loadNewsfeed { (vkNewsfeedResponse) in
            DispatchQueue.main.async {
                 for vkNewsItem in vkNewsfeedResponse.response.items {
                     let newsItem = NewsItem(with: vkNewsItem, from: vkNewsfeedResponse)
@@ -40,7 +40,7 @@ class NewsVC: UIViewController {
                 }
                 self.tableView.reloadData()
             }
-        }
+        }*/
     }
     
     // @IBActions
@@ -65,13 +65,14 @@ extension NewsVC: UITableViewDelegate {
 
 extension NewsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsfeed.count
+//        return newsfeed.count
+        return 12
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CELL_NEWS) as? NewsCell else { return UITableViewCell() }
-        cell.setupCell(with: newsfeed[indexPath.row])
+        // cell.setupCell(with: newsfeed[indexPath.row])
         return cell
     }
 }
