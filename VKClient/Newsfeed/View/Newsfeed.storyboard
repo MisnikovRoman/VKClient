@@ -87,7 +87,7 @@
         <scene sceneID="9Jn-Eg-p5r">
             <objects>
                 <navigationController title="Newsfeed" automaticallyAdjustsScrollViewInsets="NO" id="r9n-2e-A2Q" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Newsfeed" image="news" selectedImage="news" id="YpB-pP-XIj"/>
+                    <tabBarItem key="tabBarItem" title="Newsfeed" image="NewsTabBarIcon" selectedImage="NewsTabBarIcon" id="YpB-pP-XIj"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sjD-3c-oyG">
@@ -105,6 +105,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="news" width="24" height="24"/>
+        <image name="NewsTabBarIcon" width="23" height="23"/>
     </resources>
 </document>

@@ -52,7 +52,7 @@
         <scene sceneID="kOT-B7-SBj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9Th-Kb-GqC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Friends" image="friend-icon" selectedImage="friend-icon" id="Mer-RZ-Bpd"/>
+                    <tabBarItem key="tabBarItem" title="Friends" image="FriendsTabBarIcon" selectedImage="FriendsTabBarIcon" id="Mer-RZ-Bpd"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wIn-gp-dZj">
@@ -70,6 +70,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="friend-icon" width="24" height="24"/>
+        <image name="FriendsTabBarIcon" width="23" height="23"/>
     </resources>
 </document>

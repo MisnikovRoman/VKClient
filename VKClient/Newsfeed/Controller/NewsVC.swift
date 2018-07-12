@@ -11,7 +11,7 @@ import UIKit
 class NewsVC: UIViewController {
     
     // Variables
-    //var newsfeed: [NewsItem] = []
+    var newsfeed: [NewsItem] = []
     
     // Outlets
     @IBOutlet weak var tableView: UITableView!

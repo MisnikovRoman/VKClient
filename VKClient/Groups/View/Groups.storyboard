@@ -52,7 +52,7 @@
         <scene sceneID="wTh-Ig-f8B">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lp4-hn-UYL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Groupes" image="team-icon" id="s9g-Js-OEt"/>
+                    <tabBarItem key="tabBarItem" title="Groupes" image="GroupsTabBarIcon" selectedImage="GroupsTabBarIcon" id="s9g-Js-OEt"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gcB-pG-jcg">
@@ -70,6 +70,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="team-icon" width="24" height="24"/>
+        <image name="GroupsTabBarIcon" width="23" height="23"/>
     </resources>
 </document>
