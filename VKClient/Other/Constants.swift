@@ -6,7 +6,7 @@
 //  Copyright © 2018 Роман Мисников. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // closure constants
 typealias loadDataComplitionHandler = (_ success: Bool)->()
@@ -45,6 +45,24 @@ let CELL_FRIEND_2 = "Friend2CellIdentifier"
 let CELL_GROUP = "GroupCellIdentifier"
 let CELL_SEARCH_GROUP = "SearchGroupCell"
 let CELL_NEWS = "NewsCell"
+
+// News cell constants
+struct NEWSCONST {
+    // insets constants
+    static let cellInset: CGFloat = 4.0
+    static let insets: CGFloat = 16.0
+    static let titleToDateInset: CGFloat = 0.0
+    static let iconsInset: CGFloat = 8.0
+    // images size (w and h)
+    static let avatarSize: CGFloat = 60.0
+    static let iconSize: CGFloat = 25.0
+    static let titleHeight: CGFloat = 24.0
+    static let pictureHeight: CGFloat = 200.0
+    // font constants
+    static let titleFont = UIFont.systemFont(ofSize: 17.0, weight: .medium)
+    static let dateFont = UIFont.systemFont(ofSize: 14.0, weight: .light)
+    static let bodyFont = UIFont.systemFont(ofSize: 14.0)
+}
 
 // url constants
 let URL_VK_AUTH = "https://oauth.vk.com/authorize"      // url to authentification page

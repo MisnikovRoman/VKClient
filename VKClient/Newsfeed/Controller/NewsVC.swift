@@ -14,11 +14,27 @@ class NewsVC: UIViewController {
     // Variables
     var tableViewData: [NewsItem] = [] {
         didSet {
+            // calculate rowHeights
+            tableViewRowsHeight = []
+            let fixHeight = 5 * NEWSCONST.insets + NEWSCONST.avatarSize + NEWSCONST.iconSize
+            let screenWidth = UIScreen.main.bounds.width
+            for newsItem in tableViewData {
+                var dynamicTextHeight: CGFloat = 0.0
+                if newsItem.body != "" {
+                    dynamicTextHeight = ​getLabelSize(text: newsItem.body, font: NEWSCONST.bodyFont, maxWidth: screenWidth - 2 * NEWSCONST.insets).height
+                }
+                let dynamicImageHeight: CGFloat = newsItem.attachmentUrl == nil ? 0.0 : NEWSCONST.pictureHeight
+                let rowHeight = fixHeight + dynamicTextHeight + dynamicImageHeight
+                tableViewRowsHeight.append(rowHeight)
+            }
+            
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
     }
+    
+    var tableViewRowsHeight: [CGFloat] = []
     
     // Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -72,7 +88,12 @@ class NewsVC: UIViewController {
 }
 
 extension NewsVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableViewRowsHeight[indexPath.row]
+    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableViewRowsHeight[indexPath.row]
+    }
 }
 
 extension NewsVC: UITableViewDataSource {
@@ -83,7 +104,7 @@ extension NewsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CELL_NEWS) as? NewsCell else { return UITableViewCell() }
-        
+
 //        // setup image
 //        if let pictureUrl = tableViewData[indexPath.row].attachmentUrl {
 //            let queue = OperationQueue()

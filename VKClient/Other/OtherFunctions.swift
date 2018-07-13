@@ -6,7 +6,7 @@
 //  Copyright © 2018 Роман Мисников. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 func getTimeToNow(from date: Date, completion: @escaping (String)->()) {
     
@@ -37,4 +37,18 @@ func getTimeToNow(from date: Date, completion: @escaping (String)->()) {
     if (backMinutesLastSign >= 2 && backMinutesLastSign <= 4) && (backMinutesTensCount == 0 || (backMinutesTensCount >= 2 && backMinutesTensCount <= 5)) { result += "ы" }
     
     completion(result + " назад")
+}
+
+func ​getLabelSize(text: String, font: UIFont, maxWidth: CGFloat) -> CGSize {
+    // получаем максимальные размеры
+    let textBlockSize = CGSize(width: maxWidth, height: CGFloat.greatestFiniteMagnitude)
+    // расчитываем размер рамки вокруг текста
+    let rect = text.boundingRect(with: textBlockSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
+    // округляем высоту и ширину
+    let width = ceil(rect.width)
+    let height = ceil(rect.height)
+    // создаем возвращаемое значение
+    let size = CGSize(width: width, height: height)
+    // возвращаем высоту ячейки с округлением до большего числа
+    return size
 }
