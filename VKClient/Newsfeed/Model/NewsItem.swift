@@ -10,7 +10,7 @@ import UIKit
 
 class NewsItem {
     
-    let avatarImage: String
+    let avatarImage: String?
     let author, body: String
     let attachmentUrl: String?
     var date: Date
@@ -19,25 +19,45 @@ class NewsItem {
     init(with item: VKNewsResponse.VKNewsResponseData.VKItem, from newsfeed: VKNewsResponse) {
         
         // 0 - avatar (main image)
-        var avatarUrl: String {
+        var avatarUrl: String? {
             let authorId = item.sourceId
             if authorId > 0 {
-                return "⚠️ Didn't loaded user photo"
+                // get all profiles
+                let profiles = newsfeed.response.profiles
+                // get index of author
+                guard let indexOfAuthor = (profiles.index{ $0.id == authorId }) else { return nil }
+                // get profile by index
+                let userProfile = profiles[indexOfAuthor]
+                // create result variable
+                if let url = userProfile.photo100 { return url }
+                if let url = userProfile.photo50 { return url }
+                // return name
+                return nil
+                
             } else {
                 let allGroups = newsfeed.response.groups
-                guard let indexOfAuthor = (allGroups.index{ $0.id == -authorId }) else { return "Unknown group" }
+                guard let indexOfAuthor = (allGroups.index{ $0.id == -authorId }) else { return nil }
                 return allGroups[indexOfAuthor].photo100
             }
         }
-        var avatarImage = #imageLiteral(resourceName: "avatar-man")
-        // ⚠️ ADD: Image loading operation
         self.avatarImage = avatarUrl
         
         // 1 - author (user name or group name)
         var authorName: String {
             let authorId = item.sourceId
             if authorId > 0 {
-                return "Unknown user"
+                // get all profiles
+                let profiles = newsfeed.response.profiles
+                // get index of author
+                guard let indexOfAuthor = (profiles.index{ $0.id == authorId }) else { return "Unknown group" }
+                // get profile by index
+                let userProfile = profiles[indexOfAuthor]
+                // create result variable
+                var fullUserName = ""
+                if let firstName = userProfile.firstName { fullUserName += firstName }
+                if let lastName = userProfile.lastName { fullUserName += " " + lastName }
+                // return name
+                return fullUserName
             } else {
                 let allGroups = newsfeed.response.groups
                 guard let indexOfAuthor = (allGroups.index{ $0.id == -authorId }) else { return "Unknown group" }
@@ -57,7 +77,7 @@ class NewsItem {
             guard let firstAttachment = vkAttachments.first else { return nil }
             guard let sizesCnt = firstAttachment.photo?.sizes.count else { return nil }
             guard sizesCnt > 0 else { return nil }
-            guard let url = firstAttachment.photo?.sizes[sizesCnt - 1].url else { return nil }
+            guard let url = firstAttachment.photo?.sizes[0].url else { return nil }
             return url
         }
         self.attachmentUrl = photoAttachment
@@ -75,14 +95,20 @@ class NewsItem {
 extension NewsItem: CustomStringConvertible {
     var description: String {
         var resStr = ""
-        resStr += "Author: \(author)\n"
-        resStr += "Text: \(body)\n"
-        resStr += "Date: \(date)\n"
-        resStr += "Avatar: \(avatarImage)\n"
-        resStr += "Likes: \(likesCount), "
-        resStr += "Comments: \(commentsCount), "
-        resStr += "Reposts: \(repostsCount), "
-        resStr += "Views: \(viewsCount)\n"
+        //resStr += "Author: \(author)\n"
+        
+        if let attUrl = self.attachmentUrl {
+            resStr += "\(author): ❌"
+        } else {
+            resStr += "\(author): ✅"
+        }
+//        resStr += "Text: \(body)\n"
+//        resStr += "Date: \(date)\n"
+//        resStr += "Avatar: \(avatarImage)\n"
+//        resStr += "Likes: \(likesCount), "
+//        resStr += "Comments: \(commentsCount), "
+//        resStr += "Reposts: \(repostsCount), "
+//        resStr += "Views: \(viewsCount)\n"
         return resStr
     }
 }

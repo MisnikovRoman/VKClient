@@ -59,8 +59,12 @@ struct VKNewsResponse: Decodable {
         }
         
         struct VKProfile: Decodable {
-            
-            // ⚠️ - заполнить
+        
+            let id: Int?
+            let firstName: String?
+            let lastName: String?
+            var photo50: String?
+            var photo100: String?
         }
         
         struct VKGroup: Decodable {

@@ -32,19 +32,19 @@ class VKService {
         guard let url = urlWithParams?.url else { return }
         
         // DEBUG
-        print("🤖", "TOKEN: \(UserData.instance.authToken)", "URL:", url)
+        print("🤖", "URL:", url)
         
         // 2 - create request
         let request = Alamofire.request(url)
         
         // 3 - execute load operation
         let loadOperation = GetDataOperation(request)
-        loadOperation.completionBlock = { print("🎈loadOperation completed") }
+        loadOperation.completionBlock = { /*print("🎈loadOperation completed")*/ }
         queue.addOperation(loadOperation)
         
         // 4 - execute parse operation
         let parseOperation = ParseDataOperation<VKNewsResponse>()
-        parseOperation.completionBlock = { print("🎈parseOperation completed") }
+        parseOperation.completionBlock = { /*print("🎈parseOperation completed")*/ }
         parseOperation.addDependency(loadOperation)
         queue.addOperation(parseOperation)
         
@@ -53,7 +53,7 @@ class VKService {
         getNewsOperation.completionBlock = {
             guard let newsVC = vc as? NewsVC else { return }
             newsVC.tableViewData = getNewsOperation.news
-            print("🎈getNewsOperation completed")
+            print(/*"🎈getNewsOperation completed"*/)
         }
         getNewsOperation.addDependency(parseOperation)
         queue.addOperation(getNewsOperation)

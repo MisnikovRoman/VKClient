@@ -162,11 +162,12 @@ class NewsCell: UITableViewCell {
     
     private func setupBodyLbl(_ cellSize: CGRect) {
         guard let text = self.bodyLbl.text else { return }
+        let haveNoText: Bool = (text == "")
         // calculate frame
         let bodyOriginX = ceil(avatarImageView.frame.origin.x)
-        let bodyOriginY = ceil(avatarImageView.frame.origin.y + Constant.avatarSize + Constant.insets)
+        let bodyOriginY = ceil(avatarImageView.frame.origin.y + Constant.avatarSize + (haveNoText ? 0.0 : Constant.insets))
         let bodySizeWidth = ceil(cellSize.size.width - 2 * Constant.insets)
-        let bodySizeHeight = ceil(​getLabelSize(text: text, font: Constant.bodyFont, maxWidth: cellSize.size.width - 2 * Constant.insets).height)
+        let bodySizeHeight: CGFloat = haveNoText ? 0.0 :ceil(​getLabelSize(text: text, font: Constant.bodyFont, maxWidth: cellSize.size.width - 2 * Constant.insets).height)
         // set frame
         bodyLbl.frame = CGRect(x: bodyOriginX, y: bodyOriginY, width: bodySizeWidth, height: bodySizeHeight)
         // visual setup
@@ -325,9 +326,10 @@ class NewsCell: UITableViewCell {
         return size
     }
     
-    func setupCell(newsItem: NewsItem) {
+    func setupCell(newsItem: NewsItem, for indexPath: IndexPath) {
         // 1 - set avatar
-        let url = URL(string: newsItem.avatarImage)
+        if newsItem.avatarImage == nil { avatarImageView.image = #imageLiteral(resourceName: "avatar-man") }
+        let url = URL(string: newsItem.avatarImage!)
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(with: url)
         // 2 - set title
@@ -340,13 +342,15 @@ class NewsCell: UITableViewCell {
         setupBodyLbl(cellSize)
         // 5 - add attachment and calculate frame
         // with KingFisher pod
-        if let photoStringUrl = newsItem.attachmentUrl {
-            if let url = URL(string: photoStringUrl) {
-                containsImage = true
-                pictureImageView.kf.indicatorType = .activity
-                pictureImageView.kf.setImage(with: url)
-                setupPictureImageView(cellSize)
-            }
+        picture: if let photoStringUrl = newsItem.attachmentUrl {
+            // KINGFISHER
+            //guard let pictureUrl = URL(string: photoStringUrl) else { break picture }
+            containsImage = true
+            //pictureImageView.kf.indicatorType = .activity
+            //pictureImageView.kf.setImage(with: url)
+            setupPictureImageView(cellSize)
+        } else {
+            containsImage = false
         }
         
         // 6 - set likes count and calculate frame

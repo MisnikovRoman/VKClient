@@ -27,7 +27,7 @@ class AsyncOperation: Operation {
         } didSet {
             didChangeValue(forKey: state.keyPath)
             didChangeValue(forKey: oldValue.keyPath)
-            print("❗️Operation status updated: from [\(oldValue)] to [\(state)]")
+            //print("❗️Operation status updated: from [\(oldValue)] to [\(state)]")
         }
     }
     

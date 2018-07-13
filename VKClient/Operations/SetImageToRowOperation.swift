@@ -28,11 +28,15 @@ class SetImageToRowOperation: Operation {
             let getCacheImage = dependencies[0] as? GetCacheImageOperation,
             let image = getCacheImage.outputImage else { return }
         
-        if let newIndexPath = tableView.indexPath(for: cell), newIndexPath == indexPath {
-            cell.pictureImageView.image = image
-            
-        } else if tableView.indexPath(for: cell) == nil {
-            cell.pictureImageView.image = image
-        }
+//        if let newIndexPath = tableView.indexPath(for: cell), newIndexPath == indexPath {
+//            cell.pictureImageView.image = image
+//
+//        } else { //else if tableView.indexPath(for: cell) == nil {
+//            //cell.pictureImageView.image = image
+//            print("image out of range")
+//        }
+        
+        guard let newCell = tableView.cellForRow(at: indexPath) as? NewsCell else { return }
+        newCell.pictureImageView.image = image
     }
 }

@@ -31,7 +31,10 @@ class NewsVC: UIViewController {
         
         // Observe operation error messages
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name(rawValue: "OperationError"), object: nil)
-
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // Notification Center selectors
@@ -80,12 +83,18 @@ extension NewsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CELL_NEWS) as? NewsCell else { return UITableViewCell() }
-        cell.setupCell(newsItem: tableViewData[indexPath.row])
         
         // setup image
+        if let pictureUrl = tableViewData[indexPath.row].attachmentUrl {
+            let queue = OperationQueue()
+            let getCacheImage = GetCacheImageOperation(url: pictureUrl)
+            let setImageToRowOperation = SetImageToRowOperation(cell: cell, indexPath: indexPath, tableView: tableView)
+            setImageToRowOperation.addDependency(getCacheImage)
+            queue.addOperation(getCacheImage)
+            OperationQueue.main.addOperation(setImageToRowOperation)
+        }
         
-        
-        
+        cell.setupCell(newsItem: tableViewData[indexPath.row], for: indexPath)
         return cell
     }
 }
