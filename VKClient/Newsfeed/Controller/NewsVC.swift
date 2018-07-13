@@ -14,7 +14,7 @@ class NewsVC: UIViewController {
     // Variables
     var tableViewData: [NewsItem] = [] {
         didSet {
-            // calculate rowHeights
+            // calculate rowHeights for news
             tableViewRowsHeight = []
             let fixHeight = 5 * NEWSCONST.insets + NEWSCONST.avatarSize + NEWSCONST.iconSize
             let screenWidth = UIScreen.main.bounds.width
@@ -44,6 +44,9 @@ class NewsVC: UIViewController {
         super.viewDidLoad()
         
         setupTableView()
+        
+        // load news at start
+        VKService.instance.getNewsfeed(vc: self)
         
         // Observe operation error messages
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name(rawValue: "OperationError"), object: nil)
