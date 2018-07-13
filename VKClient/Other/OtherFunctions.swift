@@ -8,7 +8,7 @@
 
 import Foundation
 
-func getTimeToNow(from date: Date) -> String {
+func getTimeToNow(from date: Date, completion: @escaping (String)->()) {
     
     let backTime =  -Int(date.timeIntervalSinceNow)
     
@@ -18,7 +18,7 @@ func getTimeToNow(from date: Date) -> String {
     let backSeconds = backTime % 86400 % 3600 % 60
     
     var result = ""
-    if backDays != 0 { return "много часов назад" }
+    if backDays != 0 { completion("много часов назад") }
     if backHours != 0 {
         result += "\(backHours) час"
         switch backHours {
@@ -36,5 +36,5 @@ func getTimeToNow(from date: Date) -> String {
     // 2 3 4 22 23 24 32 33 34 ...
     if (backMinutesLastSign >= 2 && backMinutesLastSign <= 4) && (backMinutesTensCount == 0 || (backMinutesTensCount >= 2 && backMinutesTensCount <= 5)) { result += "ы" }
     
-    return result + " назад"
+    completion(result + " назад")
 }

@@ -9,6 +9,9 @@
 import Foundation
 
 class AsyncOperation: Operation {
+    
+    override var name: String? { get { return "Async Operation" } set {} }
+    
     // create own status property which we can edit
     enum State: String {
         case ready, executing, finished
@@ -40,9 +43,17 @@ class AsyncOperation: Operation {
     }
     
     override func cancel() {
+        // send error notification with operation name
+        guard let name = name else { return }
+        error(operationName: name)
         super.cancel()
         state = .finished
     }
     
+    func error(operationName: String) {
+        let dict: [String: String] = ["operationName": operationName]
+        let messWithObject = Notification(name:.init("OperationError"), object: nil, userInfo: dict)
+        NotificationCenter.default.post(messWithObject)
+    }
 
 }

@@ -28,6 +28,18 @@ class NewsVC: UIViewController {
         super.viewDidLoad()
         
         setupTableView()
+        
+        // Observe operation error messages
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(_:)), name: NSNotification.Name(rawValue: "OperationError"), object: nil)
+
+    }
+    
+    // Notification Center selectors
+    @objc func handleNotification(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        guard let operationName = userInfo["operationName"] as? String else { return }
+        let errorAlert = Alert.simpleErrorAlert(text: "Произошла ошибка во время выполнения операции \(operationName). Данная и все последующие операции были отменены")
+        self.present(errorAlert, animated: true, completion: nil)
     }
     
     // Class methods
@@ -69,6 +81,11 @@ extension NewsVC: UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CELL_NEWS) as? NewsCell else { return UITableViewCell() }
         cell.setupCell(newsItem: tableViewData[indexPath.row])
+        
+        // setup image
+        
+        
+        
         return cell
     }
 }

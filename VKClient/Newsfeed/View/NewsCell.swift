@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NewsCell: UITableViewCell {
     // MARK: - Constants
@@ -20,7 +21,7 @@ class NewsCell: UITableViewCell {
         static let avatarSize: CGFloat = 60.0
         static let iconSize: CGFloat = 25.0
         static let titleHeight: CGFloat = 24.0
-        static let pictureHeight: CGFloat = 120.0
+        static let pictureHeight: CGFloat = 200.0
         // font constants
         static let titleFont = UIFont.systemFont(ofSize: 17.0, weight: .medium)
         static let dateFont = UIFont.systemFont(ofSize: 14.0, weight: .light)
@@ -42,7 +43,7 @@ class NewsCell: UITableViewCell {
     let viewsImageView = UIImageView()
     let viewsLbl = UILabel()
     
-    let containsImage = true
+    private var containsImage: Bool = false
     
     // MARK: - Variable
     private var cellSize = CGRect(x: 0, y: 0, width: 0, height: 0)
@@ -183,10 +184,10 @@ class NewsCell: UITableViewCell {
         // set frame
         pictureImageView.frame = CGRect(x: pictureOriginX, y: pictureOriginY, width: pictureSizeWidth, height: pictureSizeHeight)
         // visual setup
-        pictureImageView.image = #imageLiteral(resourceName: "loginbg")
-        pictureImageView.contentMode = .scaleAspectFill
+        //pictureImageView.image = #imageLiteral(resourceName: "loginbg")
+        pictureImageView.contentMode = .scaleAspectFit
         pictureImageView.clipsToBounds = true
-//        pictureImageView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        pictureImageView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     }
     
     private func setupLikesImageView(_ cellSize: CGRect) {
@@ -325,18 +326,39 @@ class NewsCell: UITableViewCell {
     }
     
     func setupCell(newsItem: NewsItem) {
-        avatarImageView.image = newsItem.avatarImage
+        // 1 - set avatar
+        let url = URL(string: newsItem.avatarImage)
+        avatarImageView.kf.indicatorType = .activity
+        avatarImageView.kf.setImage(with: url)
+        // 2 - set title
         titleLbl.text = newsItem.author
-        timeLbl.text = newsItem.date
+        // 3 - set text date
+        let unixDate = newsItem.date
+        getTimeToNow(from: unixDate) { self.timeLbl.text = $0 }
+        // 4 - set body and calculate new frame
         bodyLbl.text = newsItem.body
         setupBodyLbl(cellSize)
-        //pictureImageView = ...
+        // 5 - add attachment and calculate frame
+        // with KingFisher pod
+        if let photoStringUrl = newsItem.attachmentUrl {
+            if let url = URL(string: photoStringUrl) {
+                containsImage = true
+                pictureImageView.kf.indicatorType = .activity
+                pictureImageView.kf.setImage(with: url)
+                setupPictureImageView(cellSize)
+            }
+        }
+        
+        // 6 - set likes count and calculate frame
         likesLbl.text = "\(newsItem.likesCount)"
         setupLikesLbl(cellSize)
+        // 7 - set reposts count and calculate frame
         repostsLbl.text = "\(newsItem.repostsCount)"
         setupRepostsLbl(cellSize)
+        // 8 - set comments count and calculate frame
         commentsLbl.text = "\(newsItem.commentsCount)"
         setupCommentLbl(cellSize)
+        // 9 - set views count and calculate frame
         viewsLbl.text = "\(newsItem.viewsCount)"
         setupViewLbl(cellSize)
     }

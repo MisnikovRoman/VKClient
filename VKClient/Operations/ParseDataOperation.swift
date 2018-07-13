@@ -10,6 +10,8 @@ import Foundation
 
 class ParseDataOperation<T: Decodable>: AsyncOperation {
     
+    override var name: String? { get { return "GetDataOperation" } set { } }
+    
     var outputData: T?
     
     override func main() {

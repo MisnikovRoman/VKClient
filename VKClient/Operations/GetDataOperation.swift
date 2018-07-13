@@ -16,6 +16,8 @@ enum ResponseError: Error {
 
 class GetDataOperation: AsyncOperation {
     
+    override var name: String? { get { return "GetDataOperation" } set { } }
+    
     private var request: DataRequest
     
     var data: Data?

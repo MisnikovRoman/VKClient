@@ -34,6 +34,8 @@
 		C8C26C9820F77BF6007C385D /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C26C9720F77BF6007C385D /* VKService.swift */; };
 		C8C26C9A20F78AE2007C385D /* GetNewsItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C26C9920F78AE2007C385D /* GetNewsItemOperation.swift */; };
 		C8C26C9C20F78E65007C385D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C26C9B20F78E65007C385D /* Alert.swift */; };
+		C8CA457920F890A50011CFE5 /* GetCacheImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CA457820F890A50011CFE5 /* GetCacheImageOperation.swift */; };
+		C8CA457B20F893970011CFE5 /* SetImageToRowOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CA457A20F893970011CFE5 /* SetImageToRowOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		C8C26C9720F77BF6007C385D /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
 		C8C26C9920F78AE2007C385D /* GetNewsItemOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNewsItemOperation.swift; sourceTree = "<group>"; };
 		C8C26C9B20F78E65007C385D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		C8CA457820F890A50011CFE5 /* GetCacheImageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCacheImageOperation.swift; sourceTree = "<group>"; };
+		C8CA457A20F893970011CFE5 /* SetImageToRowOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetImageToRowOperation.swift; sourceTree = "<group>"; };
 		FC9B11FBABAC94C22A685033 /* Pods-VKClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-VKClient/Pods-VKClient.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -338,6 +342,8 @@
 				C8C26C8D20F778D9007C385D /* GetDataOperation.swift */,
 				C8C26C9020F778DA007C385D /* ParseDataOperation.swift */,
 				C8C26C9920F78AE2007C385D /* GetNewsItemOperation.swift */,
+				C8CA457820F890A50011CFE5 /* GetCacheImageOperation.swift */,
+				C8CA457A20F893970011CFE5 /* SetImageToRowOperation.swift */,
 				C8C26C8E20F778D9007C385D /* (-)UpdateTableView.swift */,
 			);
 			path = Operations;
@@ -494,12 +500,14 @@
 				C89059D120F4A5CC00100B1F /* AppDelegate.swift in Sources */,
 				C8C26C9120F778DA007C385D /* GetDataOperation.swift in Sources */,
 				C8905A0020F4B57700100B1F /* OtherFunctions.swift in Sources */,
+				C8CA457920F890A50011CFE5 /* GetCacheImageOperation.swift in Sources */,
 				C8905A1520F539DB00100B1F /* NewsCell.swift in Sources */,
 				C8905A1720F5467E00100B1F /* VKNewsResponse.swift in Sources */,
 				C8C26C9420F778DA007C385D /* ParseDataOperation.swift in Sources */,
 				C89059FF20F4B57700100B1F /* UserData.swift in Sources */,
 				C89059F820F4B43D00100B1F /* WhiteUIButton.swift in Sources */,
 				C8905A0120F4B57700100B1F /* Constants.swift in Sources */,
+				C8CA457B20F893970011CFE5 /* SetImageToRowOperation.swift in Sources */,
 				C8C26C9820F77BF6007C385D /* VKService.swift in Sources */,
 				C8905A0B20F52DB100100B1F /* NewsVC.swift in Sources */,
 				C8C26C9320F778DA007C385D /* AsyncOperation.swift in Sources */,
@@ -651,7 +659,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JJHX98NUDV;
 				INFOPLIST_FILE = "$(SRCROOT)/VKClient/Supporting Files/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = RFMisnikov.VKClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -667,7 +678,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JJHX98NUDV;
 				INFOPLIST_FILE = "$(SRCROOT)/VKClient/Supporting Files/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = RFMisnikov.VKClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

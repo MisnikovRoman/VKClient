@@ -10,9 +10,10 @@ import UIKit
 
 class NewsItem {
     
-    let avatarImage: UIImage
+    let avatarImage: String
     let author, body: String
-    let date: String
+    let attachmentUrl: String?
+    var date: Date
     let likesCount, commentsCount, repostsCount, viewsCount: Int
     
     init(with item: VKNewsResponse.VKNewsResponseData.VKItem, from newsfeed: VKNewsResponse) {
@@ -30,7 +31,7 @@ class NewsItem {
         }
         var avatarImage = #imageLiteral(resourceName: "avatar-man")
         // ⚠️ ADD: Image loading operation
-        self.avatarImage = avatarImage
+        self.avatarImage = avatarUrl
         
         // 1 - author (user name or group name)
         var authorName: String {
@@ -46,20 +47,27 @@ class NewsItem {
         self.author = authorName
         
         // 2 - date (in unixtime)
-        // ⚠️ ADD: date to string conversion in global queue
-        let unixDate = item.date
-        let dateString = "15 минут назад"
-        // getTimeToNow(from: date)
-        self.date = dateString
+        self.date = item.date
         // 3 - body
         self.body = item.text
-        // 4 - likes count
+        // 4 - attachmet photo
+        var photoAttachment: String? {
+            guard let vkAttachments = item.attachments else { return nil }
+            guard item.attachments?.first?.type == "photo" else { return nil }
+            guard let firstAttachment = vkAttachments.first else { return nil }
+            guard let sizesCnt = firstAttachment.photo?.sizes.count else { return nil }
+            guard sizesCnt > 0 else { return nil }
+            guard let url = firstAttachment.photo?.sizes[sizesCnt - 1].url else { return nil }
+            return url
+        }
+        self.attachmentUrl = photoAttachment
+        // 5 - likes count
         self.likesCount = item.likes.count
-        // 5 - comments count
+        // 6 - comments count
         self.commentsCount = item.comments.count
-        // 6 - reposts count
+        // 7 - reposts count
         self.repostsCount = item.reposts.count
-        // 7 - views count
+        // 8 - views count
         self.viewsCount = item.views?.count ?? 0
     }
 }

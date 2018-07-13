@@ -10,6 +10,8 @@ import Foundation
 
 class GetNewsItemOperation: Operation {
     
+    override var name: String? { get { return "GetNewsItemOperation" } set { } }
+    
     var news: [NewsItem] = []
    
     override func main() {
