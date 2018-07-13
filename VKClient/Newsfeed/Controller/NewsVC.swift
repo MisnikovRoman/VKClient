@@ -84,15 +84,15 @@ extension NewsVC: UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CELL_NEWS) as? NewsCell else { return UITableViewCell() }
         
-        // setup image
-        if let pictureUrl = tableViewData[indexPath.row].attachmentUrl {
-            let queue = OperationQueue()
-            let getCacheImage = GetCacheImageOperation(url: pictureUrl)
-            let setImageToRowOperation = SetImageToRowOperation(cell: cell, indexPath: indexPath, tableView: tableView)
-            setImageToRowOperation.addDependency(getCacheImage)
-            queue.addOperation(getCacheImage)
-            OperationQueue.main.addOperation(setImageToRowOperation)
-        }
+//        // setup image
+//        if let pictureUrl = tableViewData[indexPath.row].attachmentUrl {
+//            let queue = OperationQueue()
+//            let getCacheImage = GetCacheImageOperation(url: pictureUrl)
+//            let setImageToRowOperation = SetImageToRowOperation(cell: cell, indexPath: indexPath, tableView: tableView)
+//            setImageToRowOperation.addDependency(getCacheImage)
+//            queue.addOperation(getCacheImage)
+//            OperationQueue.main.addOperation(setImageToRowOperation)
+//        }
         
         cell.setupCell(newsItem: tableViewData[indexPath.row], for: indexPath)
         return cell

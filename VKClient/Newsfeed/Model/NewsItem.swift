@@ -77,7 +77,7 @@ class NewsItem {
             guard let firstAttachment = vkAttachments.first else { return nil }
             guard let sizesCnt = firstAttachment.photo?.sizes.count else { return nil }
             guard sizesCnt > 0 else { return nil }
-            guard let url = firstAttachment.photo?.sizes[0].url else { return nil }
+            guard let url = firstAttachment.photo?.sizes[sizesCnt - 1].url else { return nil }
             return url
         }
         self.attachmentUrl = photoAttachment

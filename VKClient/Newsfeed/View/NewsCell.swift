@@ -344,15 +344,14 @@ class NewsCell: UITableViewCell {
         // with KingFisher pod
         picture: if let photoStringUrl = newsItem.attachmentUrl {
             // KINGFISHER
-            //guard let pictureUrl = URL(string: photoStringUrl) else { break picture }
+            guard let pictureUrl = URL(string: photoStringUrl) else { setupPictureImageView(cellSize); break picture }
             containsImage = true
-            //pictureImageView.kf.indicatorType = .activity
-            //pictureImageView.kf.setImage(with: url)
-            setupPictureImageView(cellSize)
+            pictureImageView.kf.indicatorType = .activity
+            pictureImageView.kf.setImage(with: pictureUrl)
         } else {
             containsImage = false
         }
-        
+        setupPictureImageView(cellSize)
         // 6 - set likes count and calculate frame
         likesLbl.text = "\(newsItem.likesCount)"
         setupLikesLbl(cellSize)
