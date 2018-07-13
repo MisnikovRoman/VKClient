@@ -350,6 +350,7 @@ class NewsCell: UITableViewCell {
             pictureImageView.kf.setImage(with: pictureUrl)
         } else {
             containsImage = false
+            pictureImageView.image = nil
         }
         setupPictureImageView(cellSize)
         // 6 - set likes count and calculate frame
