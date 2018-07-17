@@ -16,16 +16,30 @@ class ParseDataOperation<T: Decodable>: AsyncOperation {
     
     override func main() {
         // get object of previous operation (load data operation)
-        guard let getDataOperation = dependencies.first as? GetDataOperation else { cancel(); return }
+        guard let getDataOperation = dependencies.first as? GetDataOperation else {
+            cancel(with: InternetError.ParseError)
+            return
+        }
         // get loaded data
-        guard let data = getDataOperation.data else { cancel(); return }
+        guard let data = getDataOperation.data else {
+            // cancel()
+            return }
         // create decoder
         let decoder = JSONDecoder()
         // setup decoder
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .secondsSince1970
         // parse data with Decodable protocol
-        guard let parsedData = try? decoder.decode(T.self, from: data) else { cancel(); return }
+        if let parsedError = try? decoder.decode(VKError.self, from: data) {
+            // receiver VK error
+            let message = "VKErrorMsg: " + parsedError.error.errorMsg
+            cancel(with: InternetError.VKRequestError(receivedDescription: message))
+        }
+        
+        guard let parsedData = try? decoder.decode(T.self, from: data) else {
+            cancel(with: InternetError.ParseError)
+            return
+        }
         // save to class property
         self.outputData = parsedData
         // change state

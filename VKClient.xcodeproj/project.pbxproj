@@ -26,6 +26,8 @@
 		C8905A0B20F52DB100100B1F /* NewsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8905A0A20F52DB000100B1F /* NewsVC.swift */; };
 		C8905A1520F539DB00100B1F /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8905A1420F539DB00100B1F /* NewsCell.swift */; };
 		C8905A1720F5467E00100B1F /* VKNewsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8905A1620F5467E00100B1F /* VKNewsResponse.swift */; };
+		C8A3892E20FDD8AF001E105C /* InternetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3892D20FDD8AF001E105C /* InternetError.swift */; };
+		C8A3893020FDF51D001E105C /* VKErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3892F20FDF51D001E105C /* VKErrorModel.swift */; };
 		C8C26C8C20F77256007C385D /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C26C8B20F77256007C385D /* NewsItem.swift */; };
 		C8C26C9120F778DA007C385D /* GetDataOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C26C8D20F778D9007C385D /* GetDataOperation.swift */; };
 		C8C26C9220F778DA007C385D /* (-)UpdateTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C26C8E20F778D9007C385D /* (-)UpdateTableView.swift */; };
@@ -61,6 +63,8 @@
 		C8905A0A20F52DB000100B1F /* NewsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsVC.swift; sourceTree = "<group>"; };
 		C8905A1420F539DB00100B1F /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		C8905A1620F5467E00100B1F /* VKNewsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKNewsResponse.swift; sourceTree = "<group>"; };
+		C8A3892D20FDD8AF001E105C /* InternetError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternetError.swift; sourceTree = "<group>"; };
+		C8A3892F20FDF51D001E105C /* VKErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKErrorModel.swift; sourceTree = "<group>"; };
 		C8C26C8B20F77256007C385D /* NewsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItem.swift; sourceTree = "<group>"; };
 		C8C26C8D20F778D9007C385D /* GetDataOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDataOperation.swift; sourceTree = "<group>"; };
 		C8C26C8E20F778D9007C385D /* (-)UpdateTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "(-)UpdateTableView.swift"; sourceTree = "<group>"; };
@@ -133,7 +137,6 @@
 			isa = PBXGroup;
 			children = (
 				C89059E220F4A63400100B1F /* Application */,
-				C8C26C9520F778E4007C385D /* Operations */,
 				C89059F120F4B38500100B1F /* Login */,
 				C8905A0420F52C2C00100B1F /* Newsfeed */,
 				C8905A0C20F52FE600100B1F /* Friends */,
@@ -152,6 +155,7 @@
 				C89059E420F4A64B00100B1F /* View */,
 				C89059E320F4A64400100B1F /* Controller */,
 				C8C26C9620F77BC8007C385D /* Services */,
+				C8C26C9520F778E4007C385D /* Operations */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -177,6 +181,7 @@
 		C89059E520F4A65000100B1F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C8A3892F20FDF51D001E105C /* VKErrorModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -352,6 +357,7 @@
 		C8C26C9620F77BC8007C385D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C8A3892D20FDD8AF001E105C /* InternetError.swift */,
 				C8C26C9720F77BF6007C385D /* VKService.swift */,
 			);
 			path = Services;
@@ -494,10 +500,12 @@
 				C8C26C9220F778DA007C385D /* (-)UpdateTableView.swift in Sources */,
 				C89059FA20F4B52500100B1F /* RootVC.swift in Sources */,
 				C8C26C8C20F77256007C385D /* NewsItem.swift in Sources */,
+				C8A3892E20FDD8AF001E105C /* InternetError.swift in Sources */,
 				C8905A0320F4B74600100B1F /* WebVC.swift in Sources */,
 				C8C26C9A20F78AE2007C385D /* GetNewsItemOperation.swift in Sources */,
 				C8C26C9C20F78E65007C385D /* Alert.swift in Sources */,
 				C89059D120F4A5CC00100B1F /* AppDelegate.swift in Sources */,
+				C8A3893020FDF51D001E105C /* VKErrorModel.swift in Sources */,
 				C8C26C9120F778DA007C385D /* GetDataOperation.swift in Sources */,
 				C8905A0020F4B57700100B1F /* OtherFunctions.swift in Sources */,
 				C8CA457920F890A50011CFE5 /* GetCacheImageOperation.swift in Sources */,

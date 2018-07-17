@@ -11,7 +11,7 @@ import Alamofire
 
 class NewsVC: UIViewController {
     
-    // Variables
+    // MARK: - Table View Variables
     var tableViewData: [NewsItem] = [] {
         didSet {
             // calculate rowHeights for news
@@ -36,11 +36,11 @@ class NewsVC: UIViewController {
     
     var tableViewRowsHeight: [CGFloat] = []
     
-    // Outlets
+    // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     
-    // View controller life cycle methods
-    override func viewDidLoad() {
+    // MARK: - ViewController life cycle methods
+   override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableView()
@@ -56,11 +56,13 @@ class NewsVC: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    // MARK: - Methods
     // Notification Center selectors
     @objc func handleNotification(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         guard let operationName = userInfo["operationName"] as? String else { return }
-        let errorAlert = Alert.simpleErrorAlert(text: "Произошла ошибка во время выполнения операции \(operationName). Данная и все последующие операции были отменены")
+        guard let operationErrorDescription = userInfo["errorDescripton"] as? String else { return }
+        let errorAlert = Alert.simpleErrorAlert(text: "Произошла ошибка во время выполнения операции \(operationName). \nПодробности: \(operationErrorDescription) \nДанная и все последующие операции были отменены")
         self.present(errorAlert, animated: true, completion: nil)
     }
     
@@ -70,7 +72,7 @@ class NewsVC: UIViewController {
         tableView.dataSource = self
     }
     
-    // @IBActions
+    // MARK: - @IBActions
     @IBAction func logoutBtnTapped(_ sender: UIBarButtonItem) {
         // create exit confirmation alert controller
         let alert = UIAlertController(title: "", message: "Вы уверены что хотите выйти из своей учетной записи?", preferredStyle: .actionSheet)
@@ -90,6 +92,7 @@ class NewsVC: UIViewController {
     }
 }
 
+// MARK: - TableView Extensions
 extension NewsVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableViewRowsHeight[indexPath.row]
@@ -107,16 +110,6 @@ extension NewsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CELL_NEWS) as? NewsCell else { return UITableViewCell() }
-
-//        // setup image
-//        if let pictureUrl = tableViewData[indexPath.row].attachmentUrl {
-//            let queue = OperationQueue()
-//            let getCacheImage = GetCacheImageOperation(url: pictureUrl)
-//            let setImageToRowOperation = SetImageToRowOperation(cell: cell, indexPath: indexPath, tableView: tableView)
-//            setImageToRowOperation.addDependency(getCacheImage)
-//            queue.addOperation(getCacheImage)
-//            OperationQueue.main.addOperation(setImageToRowOperation)
-//        }
         
         cell.setupCell(newsItem: tableViewData[indexPath.row], for: indexPath)
         return cell

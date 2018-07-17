@@ -9,11 +9,6 @@
 import Foundation
 import Alamofire
 
-enum ResponseError: Error {
-    case statusCodeError
-    case noInternerConnectionError
-}
-
 class GetDataOperation: AsyncOperation {
     
     override var name: String? { get { return "GetDataOperation" } set { } }
@@ -21,8 +16,6 @@ class GetDataOperation: AsyncOperation {
     private var request: DataRequest
     
     var data: Data?
-    
-    var error: Error? = nil
     
     override func cancel() {
         request.cancel()
@@ -33,8 +26,7 @@ class GetDataOperation: AsyncOperation {
         
         // check internet connection
         guard NetworkReachabilityManager()!.isReachable else {
-            error = ResponseError.noInternerConnectionError
-            cancel()
+            cancel(with: InternetError.ConnectionError)
             return
         }
         
@@ -42,19 +34,19 @@ class GetDataOperation: AsyncOperation {
         request.responseData(queue: .global()) { [weak self] (response) in
             
             guard response.result.isSuccess else {
-                self?.error = response.error
-                self?.cancel()
+                guard let error = response.error else { return }
+                self?.cancel(with: error)
                 return
             }
             
             guard response.error == nil else {
-                self?.error = response.error!
-                self?.cancel()
+                self?.cancel(with: response.error!)
                 return
             }
             guard response.response?.statusCode == 200 else {
-                self?.error = ResponseError.statusCodeError
-                self?.cancel()
+                guard let receivedCode = response.response?.statusCode else { return }
+                let error = InternetError.StatusCodeError(receivedCode: receivedCode)
+                self?.cancel(with: error)
                 return
             }
             

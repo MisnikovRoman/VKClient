@@ -12,6 +12,9 @@ class AsyncOperation: Operation {
     
     override var name: String? { get { return "Async Operation" } set {} }
     
+    // save occured error
+    private var error: Error? = nil
+
     // create own status property which we can edit
     enum State: String {
         case ready, executing, finished
@@ -45,13 +48,24 @@ class AsyncOperation: Operation {
     override func cancel() {
         // send error notification with operation name
         guard let name = name else { return }
-        error(operationName: name)
+        // get error
+        guard let error = error else { return }
+        // send notification
+        notifyError(operationName: name, error: error)
         super.cancel()
         state = .finished
     }
     
-    func error(operationName: String) {
-        let dict: [String: String] = ["operationName": operationName]
+    func cancel(with error: Error) {
+        // save error
+        self.error = error
+        // call cancell function
+        cancel()
+    }
+    
+    func notifyError(operationName: String, error: Error) {
+        let dict: [String: String] = ["operationName": operationName,
+                                      "errorDescripton": error.localizedDescription]
         let messWithObject = Notification(name:.init("OperationError"), object: nil, userInfo: dict)
         NotificationCenter.default.post(messWithObject)
     }
